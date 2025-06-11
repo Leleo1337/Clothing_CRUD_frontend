@@ -1,7 +1,9 @@
 export type clothProps = {
-   id: number;
+   _id?: string
+   id?: string;
    name: string;
    price: number;
    quantity: number;
    size: "PP" | "P" | "M" | "G" | "GG" | "XG" | "XGG" | "EG" | "EGG";
+   deleteCloth: () => void
 };
