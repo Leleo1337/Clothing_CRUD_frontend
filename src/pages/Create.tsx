@@ -46,7 +46,7 @@ function Create() {
                <h1 className="text-gray-100 font-bold text-2xl">Nova peça de vestuario</h1>
             </div>
          </div>
-         <div className="container max-w-[900px] bg-white mx-auto pt-4 shadow-md pb-8">
+         <div className="container max-w-[900px] mx-auto pt-4 shadow-md">
             <div className="w-full bg-gray-700 rounded-t-md py-4 px-4 shadow-md">
                <h1 className="text-white font-semibold text-lg">Informaçoes da Peça</h1>
             </div>
@@ -129,16 +129,16 @@ function Create() {
                      </select>
                   </div>
                </div>
-               <div className="col-span-2 px-6 flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200">
+               <div className="col-span-2 px-6 flex flex-col sm:flex-row gap-4 pt-6 border-t border-gray-200 pb-8">
                   <button
                      onClick={submitForm}
-                     className="flex-1 flex items-center gap-2 justify-center bg-green-500 text-white px-6 py-3 rounded font-semibold transition-all duration-200 cursor-pointer hover:bg-green-600">
+                     className="flex-1 flex items-center gap-2 justify-center bg-green-500 text-white px-6 py-2.5 rounded font-semibold transition-all duration-200 cursor-pointer hover:bg-green-600">
                      <Save size={22} />
                      Criar peça
                   </button>
                   <button
                      onClick={clearFormData}
-                     className="flex-1 sm:flex-none flex items-center gap-2 justify-center px-6 py-3 border-2 border-gray-300 text-gray-700 rounded font-semibold cursor-pointer hover:bg-gray-50 hover:border-gray-400 transition-all duration-200">
+                     className="flex-1 sm:flex-none flex items-center gap-2 justify-center px-6 py-2.5 border-2 border-gray-300 text-gray-700 rounded font-semibold cursor-pointer hover:bg-gray-50 hover:border-gray-400 transition-all duration-200">
                      <RefreshCw size={22} /> Limpar
                   </button>
                </div>
