@@ -1,6 +1,7 @@
 export type clothProps = {
    _id?: string
    id?: string;
+   clothID: string; 
    name: string;
    price: number;
    quantity: number;
