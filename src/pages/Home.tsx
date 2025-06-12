@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ClothTableRow from "../components/ClothTableRow";
 import type { clothProps } from "../types/clothProps";
-import axios from "axios";
+
 import { LoaderCircle } from "lucide-react";
 import { ToastContainer, toast } from "react-toastify";
 import { Link } from "react-router";
@@ -11,18 +11,30 @@ function Home() {
    const [items, setItems] = useState<clothProps[]>([]);
    const [loading, setIsloading] = useState(true);
 
-   async function fetchCloths(){
+   async function fetchCloths() {
       try {
-         setIsloading(true)
+         setIsloading(true);
          const items = await getAllCloths();
-         setItems(items)
-         setIsloading(false)
+         setItems(items);
+         setIsloading(false);
       } catch (error) {
-         
+         console.log(error);
+         toast.error("something went wrong while fetching data");
       }
    }
+
+   async function handleDeleteCloth(clothID: string | undefined) {
+      try {
+         await deleteCloth(clothID);
+         fetchCloths();
+      } catch (error) {
+         console.log(error);
+         toast.error("something went wrong while deleting data");
+      }
+   }
+
    useEffect(() => {
-      fetchCloths()
+      fetchCloths();
    }, []);
 
    return (
@@ -70,7 +82,7 @@ function Home() {
                               price={item.price}
                               quantity={item.quantity}
                               size={item.size}
-                              deleteCloth={() => deleteCloth(item._id)}
+                              deleteCloth={() => handleDeleteCloth(item._id)}
                            />
                         ))
                      )}
