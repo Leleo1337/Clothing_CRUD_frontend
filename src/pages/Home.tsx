@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import ClothTableRow from "../components/ClothTableRow";
 import type { clothProps } from "../types/clothProps";
 
-import { LoaderCircle } from "lucide-react";
-import { ToastContainer, toast } from "react-toastify";
+import { LoaderCircle, Plus } from "lucide-react";
+import { ToastContainer } from "react-toastify";
 import { Link } from "react-router";
 import { deleteCloth, getAllCloths } from "../utils/apiService";
 
@@ -14,12 +14,11 @@ function Home() {
    async function fetchCloths() {
       try {
          setIsloading(true);
-         const items = await getAllCloths();
+         const items = (await getAllCloths()) || [];
          setItems(items);
          setIsloading(false);
       } catch (error) {
          console.log(error);
-         toast.error("something went wrong while fetching data");
       }
    }
 
@@ -29,7 +28,6 @@ function Home() {
          fetchCloths();
       } catch (error) {
          console.log(error);
-         toast.error("something went wrong while deleting data");
       }
    }
 
@@ -39,56 +37,62 @@ function Home() {
 
    return (
       <>
-         {<ToastContainer limit={3}/>}
-         <div className="w-[90%] mx-auto py-8">
-            <div>
-               <div className="bg-gray-900 py-8 rounded-md mb-2">
-                  <h1 className="text-gray-300 font-bold text-center text-3xl">Peças de vestuário</h1>
+         {<ToastContainer limit={3} />}
+         <div className="w-full py-10 mx-auto bg-gray-800 mb-6 drop-shadow-md">
+            <h1 className="text-gray-100 font-bold text-center text-4xl">Peças de vestuário</h1>
+         </div>
+         <div className="container max-w-[1200px] bg-white p-4 mx-auto shadow-md">
+            <div className="flex justify-between">
+               <div className="flex flex-col">
+                  <div className="flex gap-2 items-center">
+                     <h1 className="text-gray-700 text-2xl font-semibold">vestuario</h1>
+                     {loading && <LoaderCircle className="animate-spin text-blue-500" size={24} />}
+                  </div>
+                  <p className="text-gray-600">Gerencie suas peças de vestuario!</p>
                </div>
-               <Link
-                  to={"/Create"}
-                  className="py-1 px-2 text-white rounded-md bg-green-500 font-semibold cursor-pointer hover:bg-green-600 transition ease-in duration-100">
-                  + nova peça
-               </Link>
+               <div>
+                  <Link
+                     to={"/Create"}
+                     className="flex items-center gap-2 bg-green-500 text-white py-2 px-6 rounded-md hover:bg-green-600">
+                     <Plus size={20} />
+                     Adicionar peça
+                  </Link>
+               </div>
             </div>
-            <div className="pt-4">
-               {loading && (
-                  <LoaderCircle className="absolute right-1/2 top-[35%] animate-spin text-blue-500" size={45} />
-               )}
-               <table className="table-fixed text-left w-full shadow-sm">
-                  <thead className="bg-gray-800 text-gray-300 shadow-sm">
-                     <tr>
-                        <th className="p-2">ID</th>
-                        <th className="p-2">Nome</th>
-                        <th className="p-2">Quantidade</th>
-                        <th className="p-2">Preço</th>
-                        <th className="p-2">Tamanho</th>
-                        <th className="p-2">Ações</th>
+            <table className="table-fixed text-left w-full shadow-sm mt-3">
+               <thead className="bg-gray-800 text-gray-300 shadow-sm">
+                  <tr>
+                     <th className="px-4 py-3 rounded-tl-md">ID</th>
+                     <th className="px-4 py-3">Nome</th>
+                     <th className="px-4 py-3">Quantidade</th>
+                     <th className="px-4 py-3">Preço</th>
+                     <th className="px-4 py-3">Tamanho</th>
+                     <th className="px-4 py-3 rounded-tr-md">Ações</th>
+                  </tr>
+               </thead>
+               <tbody className="relative rounded">
+                  {items.length === 0 ? (
+                     <tr className="text-center">
+                        <td className="text-center py-4" colSpan={6}>
+                           Você não tem itens
+                        </td>
                      </tr>
-                  </thead>
-                  <tbody className="relative rounded">
-                     {items.length === 0 ? (
-                        <tr className="text-center">
-                           <td className="py-2 font-semibold text-gray-700" colSpan={6}>
-                              Você não tem items{" "}
-                           </td>
-                        </tr>
-                     ) : (
-                        items.map((item) => (
-                           <ClothTableRow
-                              key={item._id}
-                              id={item._id}
-                              name={item.name}
-                              price={item.price}
-                              quantity={item.quantity}
-                              size={item.size}
-                              deleteCloth={() => handleDeleteCloth(item._id)}
-                           />
-                        ))
-                     )}
-                  </tbody>
-               </table>
-            </div>
+                  ) : (
+                     items.map((item) => (
+                        <ClothTableRow
+                           key={item._id}
+                           id={item._id}
+                           clothID={item.clothID}
+                           name={item.name}
+                           price={item.price}
+                           quantity={item.quantity}
+                           size={item.size}
+                           deleteCloth={() => handleDeleteCloth(item._id)}
+                        />
+                     ))
+                  )}
+               </tbody>
+            </table>
          </div>
       </>
    );
