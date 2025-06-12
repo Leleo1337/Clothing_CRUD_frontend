@@ -39,7 +39,7 @@ function Home() {
 
    return (
       <>
-         {<ToastContainer />}
+         {<ToastContainer limit={3}/>}
          <div className="w-[90%] mx-auto py-8">
             <div>
                <div className="bg-gray-900 py-8 rounded-md mb-2">
