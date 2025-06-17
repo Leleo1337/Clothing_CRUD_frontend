@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { ArrowLeft, Box, DollarSign, Hash, RefreshCw, Ruler, Save } from "lucide-react";
 import { toast, ToastContainer } from "react-toastify";
-import { getCloth, updateCloth } from "../utils/apiService";
+import { getCloth, updateCloth } from "../services/clothService";
 
 const initialState = {
    name: "",
@@ -11,8 +11,7 @@ const initialState = {
    size: "",
 };
 
-
-function Create() {
+function Edit() {
    const { id } = useParams();
    const [formData, setFormData] = useState(initialState);
 
@@ -154,4 +153,4 @@ function Create() {
    );
 }
 
-export default Create;
+export default Edit;
