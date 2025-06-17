@@ -1,11 +1,14 @@
 import axios from "axios";
 import { toast } from "react-toastify";
+import { getToken } from "./authService";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 export async function getAllCloths() {
    try {
-      const response = await axios.get(`${API_URL}/api/v1/cloths`);
+      const token = getToken();
+      const response = await axios.get(`${API_URL}/api/v1/cloths`, { headers: { Authorization: `Bearer ${token}` } });
+
       return response.data.data;
    } catch (error: any) {
       console.error(error);
@@ -15,7 +18,10 @@ export async function getAllCloths() {
 
 export async function getCloth(clothID: string | undefined) {
    try {
-      const response = await axios.get(`${API_URL}/api/v1/cloths/${clothID}`);
+      const token = getToken();
+      const response = await axios.get(`${API_URL}/api/v1/cloths/${clothID}`, {
+         headers: { Authorization: `Bearer ${token}` },
+      });
       return response.data.data;
    } catch (error) {
       console.error(`something went wrong - ${error}`);
@@ -25,17 +31,23 @@ export async function getCloth(clothID: string | undefined) {
 
 export async function createCloth(formData: any) {
    try {
-      const response = await axios.post(`${API_URL}/api/v1/cloths`, formData);
+      const token = getToken();
+      const response = await axios.post(`${API_URL}/api/v1/cloths`, formData, {
+         headers: { Authorization: `Bearer ${token}` },
+      });
       return response.data;
    } catch (error: any) {
-      console.log('Something went wrong', error);
+      console.log("Something went wrong", error);
       toast.error(error.response.data.msg);
    }
 }
 
 export async function updateCloth(clothID: string | undefined, formData: any) {
    try {
-      const response = await axios.patch(`${API_URL}/api/v1/cloths/${clothID}`, formData);
+      const token = getToken();
+      const response = await axios.patch(`${API_URL}/api/v1/cloths/${clothID}`, formData, {
+         headers: { Authorization: `Bearer ${token}` },
+      });
       return response.data;
    } catch (error: any) {
       console.error(`something went wrong - ${error}`);
@@ -46,7 +58,10 @@ export async function updateCloth(clothID: string | undefined, formData: any) {
 export async function deleteCloth(clothID: string | undefined) {
    if (!window.confirm("Você tem certeza que deseja excluir esse item?")) return;
    try {
-      const response = await axios.delete(`${API_URL}/api/v1/cloths/${clothID}`);
+      const token = getToken();
+      const response = await axios.delete(`${API_URL}/api/v1/cloths/${clothID}`, {
+         headers: { Authorization: `Bearer ${token}` },
+      });
       return response.data;
    } catch (error: any) {
       console.error(`something went wrong - ${error}`);
