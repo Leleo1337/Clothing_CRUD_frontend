@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import ClothTableRow from "../components/ClothTableRow";
 import type { clothProps } from "../types/clothProps";
 
-import { LoaderCircle, Plus } from "lucide-react";
+import { LoaderCircle, LogOut, Plus } from "lucide-react";
 import { ToastContainer } from "react-toastify";
 import { Link } from "react-router";
-import { deleteCloth, getAllCloths } from "../utils/apiService";
+import { deleteCloth, getAllCloths } from "../services/clothService";
+import { removeToken } from "../services/authService";
 
 function Home() {
    const [items, setItems] = useState<clothProps[]>([]);
@@ -31,6 +32,10 @@ function Home() {
       }
    }
 
+   function logOut(){
+      removeToken()
+   }
+
    useEffect(() => {
       fetchCloths();
    }, []);
@@ -39,6 +44,7 @@ function Home() {
       <>
          {<ToastContainer limit={3} />}
          <div className="w-full py-10 mx-auto bg-gray-800 mb-6 drop-shadow-md">
+            <LogOut className="absolute left-1/2 top-4 text-white cursor-pointer" onClick={logOut}/>
             <h1 className="text-gray-100 font-bold text-center text-4xl">Peças de vestuário</h1>
          </div>
          <div className="container max-w-[1200px] bg-white p-4 mx-auto shadow-md">
