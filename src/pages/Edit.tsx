@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { ArrowLeft, Box, DollarSign, Hash, RefreshCw, Ruler, Save } from "lucide-react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { getCloth, updateCloth } from "../services/clothService";
 
 const initialState = {
@@ -42,10 +42,9 @@ function Edit() {
 
    return (
       <>
-         <ToastContainer />
          <div className="w-full py-6 mx-auto bg-gray-800 rounded-md mb-2 drop-shadow-md">
             <div className="w-[50%] text-base mx-auto space-y-3">
-               <Link to={"/"} className="flex gap-2 items-center text-gray-300 hover:text-white">
+               <Link to={"/home"} className="flex gap-2 items-center text-gray-300 hover:text-white">
                   <ArrowLeft size={20} /> Voltar
                </Link>
                <h1 className="text-gray-100 font-bold text-2xl">Editar peça de vestuario</h1>
