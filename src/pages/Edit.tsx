@@ -42,7 +42,7 @@ function Edit() {
 
    return (
       <>
-         <div className="w-full py-6 mx-auto bg-gray-800 rounded-md mb-2 drop-shadow-md">
+         <div className="w-full py-6 mx-auto bg-gray-800 mb-2 drop-shadow-md">
             <div className="w-[50%] text-base mx-auto space-y-3">
                <Link to={"/home"} className="flex gap-2 items-center text-gray-300 hover:text-white">
                   <ArrowLeft size={20} /> Voltar
