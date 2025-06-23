@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router";
 import { ArrowLeft, Box, DollarSign, Hash, RefreshCw, Ruler, Save } from "lucide-react";
 import { createCloth } from "../services/clothService";
