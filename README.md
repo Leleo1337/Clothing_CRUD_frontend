@@ -75,3 +75,4 @@ npm run dev
 ![image](https://github.com/user-attachments/assets/c393b5c6-3f4e-4e57-b4b4-6e2c5cd00e0f)
 
 
+Esse projeto foi baseado em um CRUD de trabalho de faculdade de um amigo.
