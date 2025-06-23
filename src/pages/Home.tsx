@@ -100,7 +100,7 @@ function Home() {
 									id={item._id}
 									clothID={item.clothID}
 									name={item.name}
-									price={item.price}
+									formattedPrice={item.formattedPrice}
 									quantity={item.quantity}
 									size={item.size}
 									deleteCloth={() => handleDeleteCloth(item._id)}
