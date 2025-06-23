@@ -3,7 +3,8 @@ export type clothProps = {
    id?: string;
    clothID: string; 
    name: string;
-   price: number;
+   price?: number;
+   formattedPrice?: string;
    quantity: number;
    size: "PP" | "P" | "M" | "G" | "GG" | "XG" | "XGG" | "EG" | "EGG";
    deleteCloth: () => void

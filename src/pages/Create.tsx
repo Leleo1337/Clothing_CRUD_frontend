@@ -31,10 +31,6 @@ function Create() {
       setFormData(initialState);
    }
 
-   useEffect(() => {
-      console.log(formData);
-   }, [formData]);
-
    return (
       <>
          <div className="w-full py-6 mx-auto bg-gray-800 rounded-md mb-2 drop-shadow-md">

@@ -4,6 +4,7 @@ import { AuthContext } from '../context/authContext';
 import { toast } from 'react-toastify';
 
 const defaultFormData = {
+	name: '',
 	email: '',
 	password: '',
 };
@@ -15,6 +16,13 @@ export default function Login() {
 
 	function handleChange(e: any) {
 		const { name, value } = e.target;
+
+		if (name === 'identifier') {
+			const key = value.includes('@') ? 'email' : 'name';
+
+			setFormData((prev) => ({ ...prev, [key]: value }));
+		}
+
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	}
 
@@ -43,18 +51,18 @@ export default function Login() {
 					<div className='flex flex-col gap-1'>
 						<label
 							className='font-semibold text-gray-600 text-sm'
-							htmlFor='email'
+							htmlFor='identifier'
 						>
-							Email
+							User
 						</label>
 						<div className='relative'>
 							<input
 								type='text'
-								name='email'
-								id='email'
+								name='identifier'
+								id='identifier'
 								autoComplete='off'
 								className='w-full border border-gray-400 rounded-md pl-12 py-2'
-								placeholder='seu@email.com'
+								placeholder='Usuario ou email'
 								onChange={handleChange}
 							/>
 							<Mail className='absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5' />
@@ -106,7 +114,7 @@ export default function Login() {
 					</div>
 					<div>
 						<button
-                     type='button'
+							type='button'
 							onClick={handleSubmit}
 							className='flex items-center justify-center w-full bg-gray-700 text-white py-3 font-semibold rounded-md hover:bg-gray-800 cursor-pointer'
 						>
