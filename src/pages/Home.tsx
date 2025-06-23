@@ -3,7 +3,7 @@ import ClothTableRow from '../components/ClothTableRow';
 import type { clothProps } from '../types/clothProps';
 import { LoaderCircle, LogOut, Plus } from 'lucide-react';
 import { Link } from 'react-router';
-import { deleteCloth, getAllCloths } from '../services/clothService';
+import { deleteCloth, getAllClothes } from '../services/clothService';
 import { AuthContext } from '../context/authContext';
 import { toast } from 'react-toastify';
 
@@ -13,10 +13,10 @@ function Home() {
 	const [items, setItems] = useState<clothProps[]>([]);
 	const [loading, setIsloading] = useState(true);
 
-	async function fetchCloths() {
+	async function fetchClothes() {
 		try {
 			setIsloading(true);
-			const items = (await getAllCloths()) || [];
+			const items = (await getAllClothes()) || [];
 			setItems(items);
 			setIsloading(false);
 		} catch (error) {
@@ -28,7 +28,7 @@ function Home() {
 		try {
 			await deleteCloth(clothID);
          toast.success('Item deletado')
-			fetchCloths();
+			fetchClothes();
 		} catch (error) {
 			console.log(error);
 		}
@@ -36,7 +36,7 @@ function Home() {
 
 
 	useEffect(() => {
-		fetchCloths();
+		fetchClothes();
 	}, []);
 
 	return (

@@ -4,10 +4,10 @@ import { getToken } from "./authService";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export async function getAllCloths() {
+export async function getAllClothes() {
    try {
       const token = getToken();
-      const response = await axios.get(`${API_URL}/api/v1/cloths`, { headers: { Authorization: `Bearer ${token}` } });
+      const response = await axios.get(`${API_URL}/api/v1/clothes`, { headers: { Authorization: `Bearer ${token}` } });
 
       return response.data.data;
    } catch (error: any) {
@@ -19,7 +19,7 @@ export async function getAllCloths() {
 export async function getCloth(clothID: string | undefined) {
    try {
       const token = getToken();
-      const response = await axios.get(`${API_URL}/api/v1/cloths/${clothID}`, {
+      const response = await axios.get(`${API_URL}/api/v1/clothes/${clothID}`, {
          headers: { Authorization: `Bearer ${token}` },
       });
       return response.data.data;
@@ -32,7 +32,7 @@ export async function getCloth(clothID: string | undefined) {
 export async function createCloth(formData: any) {
    try {
       const token = getToken();
-      const response = await axios.post(`${API_URL}/api/v1/cloths`, formData, {
+      const response = await axios.post(`${API_URL}/api/v1/clothes`, formData, {
          headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;
@@ -45,7 +45,7 @@ export async function createCloth(formData: any) {
 export async function updateCloth(clothID: string | undefined, formData: any) {
    try {
       const token = getToken();
-      const response = await axios.patch(`${API_URL}/api/v1/cloths/${clothID}`, formData, {
+      const response = await axios.patch(`${API_URL}/api/v1/clothes/${clothID}`, formData, {
          headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;
@@ -59,7 +59,7 @@ export async function deleteCloth(clothID: string | undefined) {
    if (!window.confirm("Você tem certeza que deseja excluir esse item?")) return;
    try {
       const token = getToken();
-      const response = await axios.delete(`${API_URL}/api/v1/cloths/${clothID}`, {
+      const response = await axios.delete(`${API_URL}/api/v1/clothes/${clothID}`, {
          headers: { Authorization: `Bearer ${token}` },
       });
       return response.data;
